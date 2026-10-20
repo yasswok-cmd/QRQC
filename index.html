@@ -1,0 +1,1126 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>QRQC Niveau 1 Assemblage</title>
+<meta name="description" content="Fiches QRQC niveau 1 (E1 à E8) pour l'assemblage.">
+<meta name="theme-color" content="#1757B8">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="QRQC">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>
+/* Thème volontairement unique : blanc principal, bleu secondaire */
+:root{
+  color-scheme:light;
+  --bg:#F4F7FB; --surface:#FFFFFF; --field:#FFFFFF; --ink:#0F1E36; --muted:#5C6B82; --line:#DCE3EC;
+  --band:#FFFFFF; --band-ink:#0F1E36; --accent:#1757B8; --accent-soft:#EAF1FC; --accent-line:#BFD3F2;
+  --red:#C3302A; --red-soft:#FCEBEA; --green:#237A48; --green-soft:#E6F4EC; --amber:#9A620C; --amber-soft:#FCF3E1;
+  --display:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; --body:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; --mono:ui-monospace,"SF Mono",Consolas,"Roboto Mono",monospace;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+<script src="sync.js"></script>
+body{background:var(--bg);color:var(--ink);font:15px/1.45 var(--body);margin:0;-webkit-text-size-adjust:100%;
+  padding:0 env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+img{max-width:100%}
+[hidden]{display:none!important}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.app{display:grid;grid-template-columns:300px 1fr;height:100%}
+/* sidebar */
+aside{background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;padding-top:env(safe-area-inset-top,0px)}
+.brand{padding:20px 18px 14px;display:flex;flex-direction:column;gap:4px;border-top:4px solid var(--accent)}
+.brand b{font:700 19px/1.1 var(--display);color:var(--accent)}
+.brand small{color:var(--muted);font-size:13px}
+.side-tools{padding:0 18px 12px;display:flex;flex-direction:column;gap:8px}
+.btn{border:1px solid var(--line);background:var(--surface);padding:8px 14px;border-radius:6px;cursor:pointer;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.btn.danger{color:var(--red)}
+.btn.danger.armed{background:var(--red);border-color:var(--red);color:var(--surface)}
+.search{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--field)}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:none;padding:3px 10px;border-radius:99px;font-size:13px;cursor:pointer;color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent-line);color:var(--accent);font-weight:600}
+.list{overflow:auto;flex:1;border-top:1px solid var(--line)}
+.item{display:grid;gap:3px;width:100%;text-align:left;padding:11px 18px;border:0;border-bottom:1px solid var(--line);background:none;cursor:pointer}
+.item:hover{background:var(--field)}
+.item[aria-current="true"]{background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.item .top{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.item .num{font:500 13px var(--mono)}
+.item .desc{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.item .meta{font-size:12px;color:var(--muted)}
+.empty{padding:18px;color:var(--muted);font-size:14px}
+.side-foot{border-top:1px solid var(--line);padding:10px 18px calc(10px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px}
+.sync{font-size:12px;color:var(--muted)}
+.pill{font:600 11px/1 var(--body);text-transform:uppercase;letter-spacing:.06em;padding:4px 7px;border-radius:4px;white-space:nowrap}
+.pill.ouvert{background:var(--amber-soft);color:var(--amber)}
+.pill.verif{background:var(--accent-soft);color:var(--accent)}
+.pill.clos{background:var(--green-soft);color:var(--green)}
+.pill.n3{background:var(--red);color:var(--surface)}
+.pill.n2{background:var(--red-soft);color:var(--red)}
+/* main */
+main{overflow:auto;min-height:0;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-reduced-motion:reduce){main{scroll-behavior:auto}}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:24px;padding-block:20px 60px;display:flex;flex-direction:column;gap:18px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.head h1{margin:0;font:600 26px/1.15 var(--display);letter-spacing:-.01em;text-wrap:balance}
+.head .sub{color:var(--muted);font-size:14px}
+.head .acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.menu-btn{display:none}
+nav.steps{position:sticky;top:0;z-index:5;background:var(--bg);padding-block:8px;display:flex;gap:6px;overflow-x:auto;border-bottom:1px solid var(--line)}
+nav.steps a{flex:none;display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--ink);font:500 14px var(--display);padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:var(--surface)}
+nav.steps a:hover{border-color:var(--accent-line);color:var(--accent)}
+nav.steps a i{width:9px;height:9px;border-radius:50%;border:2px solid var(--line);flex:none}
+nav.steps a.partial i{border-color:var(--amber);background:var(--amber-soft)}
+nav.steps a.done i{border-color:var(--green);background:var(--green)}
+.alert{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:6px;font-size:14px}
+.alert b{font:700 15px var(--display);display:block}
+.alert.n3{background:var(--red);color:var(--surface)}
+.alert.n2{background:var(--red-soft);color:var(--red);border:1px solid var(--red)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;scroll-margin-top:60px;box-shadow:0 1px 2px rgba(15,30,54,.04),0 4px 14px rgba(23,87,184,.05)}
+.band{background:var(--band);color:var(--band-ink);padding:14px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.band .code{font:600 13px var(--mono);letter-spacing:.02em;background:var(--accent);color:#FFFFFF;padding:4px 9px;border-radius:5px}
+.band h2{margin:0;font:600 17px/1.25 var(--display);letter-spacing:0}
+.band .hint{margin-left:auto;font-size:13px;color:var(--muted)}
+.body{padding:16px;display:flex;flex-direction:column;gap:16px}
+.grid{display:grid;gap:12px 14px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.fld{display:flex;flex-direction:column;gap:4px;min-width:0}
+.fld>span,.lbl{font:600 12px var(--body);text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.fld input,.fld select,.fld textarea,td input,td select{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:5px;background:var(--field);min-width:0}
+.fld textarea{min-height:70px;resize:vertical}
+input[type=number],.mono{font-family:var(--mono);font-size:14px;font-variant-numeric:tabular-nums}
+.w{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.w5{border:1px solid var(--line);border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:10px;background:#FAFCFF}
+.w5 h3{margin:0;font:600 15px var(--display);color:var(--accent);display:flex;gap:8px;align-items:baseline}
+.w5 h3 small{font:500 13px var(--body);text-transform:none;letter-spacing:0;color:var(--muted)}
+.checks{display:flex;flex-direction:column;gap:6px}
+.ck{display:flex;gap:9px;align-items:flex-start;font-size:14px;cursor:pointer}
+.ck input{width:17px;height:17px;margin:2px 0 0;accent-color:var(--accent);flex:none}
+.ck sup{color:var(--red);font-weight:700}
+.ck.crit input{accent-color:var(--red)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{font:600 12px var(--body);text-transform:uppercase;letter-spacing:.06em;text-align:left;padding:8px 10px;background:var(--accent-soft);color:var(--accent);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+td.rowh{font-weight:500;white-space:nowrap}
+td input[type=number]{max-width:110px}
+tfoot td{font-weight:600;background:var(--field)}
+.num-cell{font:500 14px var(--mono);font-variant-numeric:tabular-nums}
+.addrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:-6px}
+.xbtn{border:1px solid var(--line);background:var(--surface);color:var(--red);border-radius:5px;cursor:pointer;width:30px;height:30px;line-height:1;font-size:14px;padding:0}
+.xbtn:hover{border-color:var(--red);background:var(--red-soft)}
+td.rowdel{width:44px;text-align:center}
+.pieces{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.piece{border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.piece.good{background:var(--green-soft)}
+.piece.bad{background:var(--red-soft)}
+.piece.good .lbl{color:var(--green)} .piece.bad .lbl{color:var(--red)}
+.piece textarea{width:100%;min-height:54px;padding:8px 10px;border:1px solid var(--line);border-radius:5px;background:var(--surface);resize:vertical}
+.thumbs{display:flex;flex-wrap:wrap;gap:8px}
+.thumbs:empty{display:none}
+.thumb{padding:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface);cursor:pointer;width:74px;height:74px;flex:none}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.photo-btns .btn{padding:7px 12px;font-size:14px;font-weight:600}
+.photo-btns .hintmax{font-size:12px;color:var(--muted)}
+#photoDlg{padding:14px;max-width:min(720px,calc(100vw - 24px))}
+#photoDlg img{max-width:100%;max-height:70vh;border-radius:8px;display:block;margin:0 auto}
+#photoDlg .row{justify-content:space-between;gap:10px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;align-self:flex-start}
+.seg label{padding:7px 16px;cursor:pointer;font-weight:600;border-right:1px solid var(--line);position:relative}
+.seg label:last-child{border-right:0}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label:has(input:checked){background:var(--accent);color:#FFFFFF}
+.seg label:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:-2px}
+.fld input:focus,.fld select:focus,.fld textarea:focus,td input:focus,td select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);outline:none}
+.shifts{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.shift{border:1px solid var(--line);border-radius:6px;padding:10px;display:flex;flex-direction:column;gap:8px}
+.shift .lbl{display:flex;justify-content:space-between}
+.shift.ok{border-color:var(--green);background:var(--green-soft)}
+.shift.ko{border-color:var(--red);background:var(--red-soft)}
+.shift input{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:5px;background:var(--surface)}
+.sign{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.sig{border:1px dashed var(--line);border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.sig.signed{border-style:solid;border-color:var(--green)}
+.sig h3{margin:0;font:600 15px var(--display);color:var(--accent)}
+.sig h3 small{font:500 12px var(--body);color:var(--muted);text-transform:none;letter-spacing:0}
+.notes{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:3px;padding-inline:4px}
+.progress{font:500 13px var(--mono);color:var(--muted)}
+.scrim{display:none}
+.views{display:grid;grid-template-columns:1fr 1fr;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:3px;gap:3px}
+.views button{border:0;background:none;padding:7px 6px;border-radius:6px;cursor:pointer;font-weight:500;color:var(--muted)}
+.views button[aria-selected="true"]{background:var(--surface);color:var(--accent);font-weight:600;box-shadow:0 1px 3px rgba(15,30,54,.1)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.kpi span{font-size:13px;color:var(--muted)}
+.kpi b{font:600 28px/1 var(--mono);font-variant-numeric:tabular-nums;color:var(--ink)}
+.kpi.blue b{color:var(--accent)} .kpi.amber b{color:var(--amber)} .kpi.green b{color:var(--green)} .kpi.red b{color:var(--red)}
+.tbl.flat{border:0;border-radius:0}
+.dbt th{cursor:pointer;user-select:none}
+.dbt th[aria-sort="ascending"]::after{content:" ▲";font-size:10px}
+.dbt th[aria-sort="descending"]::after{content:" ▼";font-size:10px}
+.dbt tbody tr{cursor:pointer}
+.dbt tbody tr:hover td{background:var(--accent-soft)}
+.dbt td{padding:10px;white-space:nowrap}
+.dbt td.desc{white-space:normal;min-width:220px;max-width:340px}
+.dbt td.n{font:500 13px var(--mono);font-variant-numeric:tabular-nums;text-align:right}
+.dbt .imp{color:var(--red);font-weight:600}
+.dbt td.sel,.dbt th.sel{width:42px;text-align:center;cursor:default}
+.dbt input[type=checkbox]{width:19px;height:19px;accent-color:var(--accent);cursor:pointer}
+.dbfilters{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.dbfilters .fld{max-width:180px}
+.dbfilters .fld input{padding:8px 10px;border:1px solid var(--line);border-radius:5px;background:var(--field)}
+.selinfo{margin-left:auto;font-size:13px;color:var(--muted)}
+/* toast + dialogue d'installation */
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;z-index:50;max-width:calc(100vw - 32px);box-shadow:0 6px 20px rgba(15,30,54,.25)}
+dialog{border:1px solid var(--line);border-radius:12px;padding:20px;max-width:min(440px,calc(100vw - 32px));color:var(--ink)}
+dialog::backdrop{background:rgba(15,30,54,.4)}
+dialog h2{margin:0 0 10px;font:600 18px var(--display);color:var(--accent)}
+dialog h3{margin:14px 0 4px;font:600 14px var(--display)}
+dialog p,dialog ol{margin:0;font-size:14px;color:var(--muted)}
+dialog ol{padding-left:20px}
+dialog .row{display:flex;justify-content:flex-end;margin-top:16px}
+/* écrans tactiles : cibles plus grandes, pas de zoom iOS sur les champs */
+@media (pointer:coarse){
+  .fld input,.fld select,.fld textarea,td input,td select,.search,.shift input,.piece textarea{font-size:16px;padding:10px 11px}
+  .ck{font-size:15px;padding-block:3px}
+  .ck input{width:22px;height:22px;margin-top:0}
+  .btn{padding:10px 16px}
+  .chip{padding:6px 12px}
+  .seg label{padding:10px 20px}
+}
+@media (max-width:860px){
+  .app{grid-template-columns:1fr}
+  aside{position:fixed;inset:0 auto 0 0;width:min(320px,86vw);z-index:20;transform:translateX(-102%);transition:transform .2s}
+  .app.open aside{transform:none}
+  .app.open .scrim{display:block;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:15}
+  .menu-btn{display:inline-flex}
+  .wrap{padding-inline:16px}
+  .shifts{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+  .pieces{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <aside>
+    <div class="brand"><b>QRQC · Niveau 1</b><small>Quick Response Quality Control — Assemblage</small></div>
+    <div class="side-tools">
+      <div class="views" role="tablist" aria-label="Vue">
+        <button type="button" role="tab" id="tabFiche" aria-selected="true">Fiche</button>
+        <button type="button" role="tab" id="tabDb" aria-selected="false">Historique</button>
+      </div>
+      <button class="btn primary" id="newBtn" type="button">+ Nouvelle fiche QRQC</button>
+      <input class="search" id="search" type="search" placeholder="Rechercher (n°, défaut, ligne…)" aria-label="Rechercher une fiche">
+      <div class="filters" id="filters">
+        <button class="chip" type="button" data-s="all" aria-pressed="true">Toutes</button>
+        <button class="chip" type="button" data-s="ouvert" aria-pressed="false">Ouvertes</button>
+        <button class="chip" type="button" data-s="verif" aria-pressed="false">Vérification</button>
+        <button class="chip" type="button" data-s="clos" aria-pressed="false">Clôturées</button>
+      </div>
+    </div>
+    <div class="list" id="list"></div>
+    <div class="side-foot">
+      <button class="btn" type="button" id="installBtn" hidden>⤓ Installer l'application</button>
+      <div class="sync" id="sync">Chargement…</div>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <main id="main">
+    <div class="wrap" id="dbview" hidden>
+      <div class="head">
+        <div>
+          <button class="btn menu-btn" type="button" id="menuBtn2">☰ Fiches</button>
+          <h1>Historique QRQC</h1>
+          <div class="sub">Fiches enregistrées sur cet appareil</div>
+        </div>
+        <div class="acts">
+          <button class="btn primary" type="button" id="xlsxBtn">Ouvrir dans Excel</button>
+          <button class="btn" type="button" id="backupBtn">Sauvegarder (.json)</button>
+          <label class="btn" for="importFile">Importer une sauvegarde</label>
+          <input type="file" id="importFile" accept=".json,application/json" hidden>
+        </div>
+      </div>
+      <div class="dbfilters">
+        <label class="fld"><span>Date — du</span><input type="date" id="dFrom"></label>
+        <label class="fld"><span>Date — au</span><input type="date" id="dTo"></label>
+        <button class="btn" type="button" id="dClear">Effacer les dates</button>
+        <span class="selinfo" id="selInfo"></span>
+      </div>
+      <div class="kpis" id="kpis"></div>
+      <div class="card">
+        <div class="band"><span class="code">HIST</span><h2>Historique des fiches</h2><span class="hint" id="dbCount"></span></div>
+        <div class="tbl flat"><table class="dbt">
+          <thead id="dbHead"></thead>
+          <tbody id="dbBody"></tbody>
+        </table></div>
+      </div>
+      <div class="notes">
+        <span>Touchez une ligne pour ouvrir la fiche. Touchez un en-tête de colonne pour trier. La recherche et les filtres de la barre latérale s'appliquent aussi à ce tableau.</span>
+        <span>Les fiches restent sur cet appareil. Pour les regrouper sur un autre appareil : « Sauvegarder (.json) » ici, puis « Importer une sauvegarde » là-bas. Les fiches déjà présentes sont mises à jour si la sauvegarde est plus récente.</span>
+      </div>
+    </div>
+    <form class="wrap" id="form" autocomplete="off" onsubmit="return false">
+      <div class="head">
+        <div>
+          <button class="btn menu-btn" type="button" id="menuBtn">☰ Fiches</button>
+          <h1 id="title">Nouvelle fiche QRQC</h1>
+          <div class="sub" id="subtitle">Remplir E1 à E8 — enregistrement automatique</div>
+        </div>
+        <div class="acts">
+          <span id="statusPill"></span>
+          <button class="btn danger" type="button" id="delBtn">Supprimer</button>
+        </div>
+      </div>
+
+      <nav class="steps" id="steps" aria-label="Étapes">
+        <a href="#s0" data-k="s0"><i></i>En-tête</a>
+        <a href="#e1" data-k="e1"><i></i>E1</a>
+        <a href="#e2" data-k="e2"><i></i>E2</a>
+        <a href="#e3" data-k="e3"><i></i>E3</a>
+        <a href="#e4" data-k="e4"><i></i>E4</a>
+        <a href="#e5" data-k="e5"><i></i>E5 · E6</a>
+        <a href="#e7" data-k="e7"><i></i>E7</a>
+        <a href="#e8" data-k="e8"><i></i>E8</a>
+      </nav>
+
+      <div id="alerts" style="display:flex;flex-direction:column;gap:8px"></div>
+
+      <!-- En-tête -->
+      <section class="card" id="s0">
+        <div class="band"><span class="code">QRQC</span><h2>Identification</h2></div>
+        <div class="body">
+          <div class="grid">
+            <label class="fld"><span>N° QRQC / Étiquette rouge</span>
+              <div style="display:flex;gap:8px">
+                <input class="mono" data-f="numero" style="flex:1">
+                <button class="btn" type="button" id="scanQrBtn" title="Scanner l'etiquette" style="padding:8px 12px">QR</button>
+              </div>
+            </label>
+            <label class="fld"><span>Date</span><input type="date" data-f="date"></label>
+            <label class="fld"><span>Projet</span><input data-f="projet"></label>
+            <label class="fld"><span>Famille</span><input data-f="famille"></label>
+            <label class="fld"><span>Team Speaker</span><input data-f="teamSpeaker"></label>
+            <label class="fld"><span>Agent Qualité</span><input data-f="agentQualite"></label>
+            <label class="fld"><span>Superviseur</span><input data-f="superviseur"></label>
+          </div>
+          <div class="pieces">
+            <div class="piece good"><span class="lbl">Pièce bonne</span>
+              <textarea data-f="pieceBonne" placeholder="Description / référence de la pièce conforme" aria-label="Pièce bonne"></textarea>
+              <div class="thumbs" id="thumbs-bonne"></div>
+              <div class="photo-btns" id="btns-bonne"></div></div>
+            <div class="piece bad"><span class="lbl">Pièce mauvaise</span>
+              <textarea data-f="pieceMauvaise" placeholder="Description / référence de la pièce non conforme" aria-label="Pièce mauvaise"></textarea>
+              <div class="thumbs" id="thumbs-mauvaise"></div>
+              <div class="photo-btns" id="btns-mauvaise"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- E1 -->
+      <section class="card" id="e1">
+        <div class="band"><span class="code">E1</span><h2>Caractéristiques du problème</h2></div>
+        <div class="body">
+          <label class="fld"><span>Quoi — Description du défaut</span><textarea data-f="e1.description"></textarea></label>
+          <div class="w">
+            <div class="w5"><h3>Qui <small>a détecté le défaut ?</small></h3>
+              <label class="fld"><span>Matricule</span><input class="mono" data-f="e1.matricule"></label></div>
+            <div class="w5"><h3>Où <small>a été détecté le défaut ?</small></h3>
+              <label class="fld"><span>Ligne / LAD</span><input data-f="e1.ligne"></label>
+              <label class="fld"><span>N° Poste</span><input data-f="e1.poste"></label></div>
+            <div class="w5"><h3>Quand <small>date et heure de détection</small></h3>
+              <label class="fld"><span>Date</span><input type="date" data-f="e1.date"></label>
+              <label class="fld"><span>Heure</span><input type="time" data-f="e1.heure"></label>
+              <label class="fld"><span>Shift</span><select data-f="e1.shift"><option value="">—</option><option>Matin</option><option>Après-midi</option><option>Nuit</option></select></label></div>
+          </div>
+          <div class="w">
+            <div class="w5"><h3>Comment <small>le défaut a été détecté ?</small></h3>
+              <div class="checks" id="commentChecks"></div>
+              <label class="fld"><span>Autres (préciser)</span><input data-f="e1.commentAutre"></label></div>
+            <div class="w5"><h3>Pourquoi <small>le défaut impacte-t-il sur…</small></h3>
+              <div class="checks" id="impactChecks"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- E2 -->
+      <section class="card" id="e2">
+        <div class="band"><span class="code">E2</span><h2>Sécurisation — Combien</h2><span class="hint">Quantités trouvées dans le tri (utiliser une fiche de tri si nécessaire)</span></div>
+        <div class="body">
+          <div class="tbl"><table>
+            <thead><tr><th>Les zones</th><th>Quantité initiale</th><th>OK</th><th>NOK</th></tr></thead>
+            <tbody id="zonesBody"></tbody>
+            <tfoot><tr><td>Total</td><td class="num-cell" id="tQi">0</td><td class="num-cell" id="tOk">0</td><td class="num-cell" id="tNok">0</td></tr></tfoot>
+          </table></div>
+        </div>
+      </section>
+
+      <!-- E3 -->
+      <section class="card" id="e3">
+        <div class="band"><span class="code">E3</span><h2>Synthèse des actions de sécurisation</h2></div>
+        <div class="body">
+          <div class="fld"><span>Protection totale du client — le client est-il totalement protégé (OK) ?</span>
+            <div class="seg" role="radiogroup" aria-label="Client totalement protégé">
+              <label><input type="radio" name="protege" data-f="e3.protege" value="oui">Oui</label>
+              <label><input type="radio" name="protege" data-f="e3.protege" value="non">Non</label>
+            </div></div>
+          <div class="fld"><span>Les actions de sécurisation (obligatoires)</span><div class="checks" id="securChecks"></div></div>
+        </div>
+      </section>
+
+      <!-- E4 -->
+      <section class="card" id="e4">
+        <div class="band"><span class="code">E4</span><h2>Analyse préliminaire du problème</h2></div>
+        <div class="body"><div class="w">
+          <div class="w5"><h3>Qui <small>a produit le défaut ?</small></h3>
+            <label class="fld"><span>Matricule</span><input class="mono" data-f="e4.matricule"></label></div>
+          <div class="w5"><h3>Où <small>a été produit le défaut ?</small></h3>
+            <label class="fld"><span>Ligne / LAD</span><input data-f="e4.ligne"></label>
+            <label class="fld"><span>N° Poste</span><input data-f="e4.poste"></label></div>
+          <div class="w5"><h3>Quand <small>a été produit le défaut ?</small></h3>
+            <label class="fld"><span>Date</span><input type="date" data-f="e4.date"></label>
+            <label class="fld"><span>Heure</span><input type="time" data-f="e4.heure"></label>
+            <label class="fld"><span>Shift</span><select data-f="e4.shift"><option value="">—</option><option>Matin</option><option>Après-midi</option><option>Nuit</option></select></label></div>
+        </div></div>
+      </section>
+
+      <!-- E5/E6 -->
+      <section class="card" id="e5">
+        <div class="band"><span class="code">E5 · E6</span><h2>Analyse des causes, actions et pilotes</h2><span class="hint">Quelles sont les causes racines et les actions à appliquer ?</span></div>
+        <div class="body">
+          <div class="lbl">Causes racines — analyse 5M du poste</div>
+          <div class="tbl"><table>
+            <thead><tr><th>Cause</th><th>Famille 5M</th><th>Description</th><th></th></tr></thead>
+            <tbody id="causesBody"></tbody>
+          </table></div>
+          <div class="lbl">Plan d'action rapide — E6 : Pilote <span id="actionsPct" style="float:right;font-size:13px;color:#5C6B82;font-weight:normal"></span></div>
+          <div class="tbl"><table>
+            <thead><tr><th>Action</th><th>Description</th><th>Pilote (nom)</th><th>Service</th><th>Date de réalisation</th><th>Heure</th><th></th></tr></thead>
+            <tbody id="actionsBody"></tbody>
+          </table></div>
+          <div class="addrow"><button class="btn" type="button" id="addAction">+ Ajouter une action</button><span class="hintmax" id="maxAction"></span></div>
+        </div>
+      </section>
+
+      <!-- E7 -->
+      <section class="card" id="e7">
+        <div class="band"><span class="code">E7</span><h2>Vérification — suivi défauts sur 5 shifts consécutifs</h2><span class="progress" id="shiftProg"></span></div>
+        <div class="body">
+          <div class="shifts" id="shiftsBox"></div>
+          <div class="grid"><label class="fld"><span>Validation Qualité (AQL)</span><input data-f="e7.aql" placeholder="Résultat / référence AQL"></label></div>
+        </div>
+      </section>
+
+      <!-- E8 -->
+      <section class="card" id="e8">
+        <div class="band"><span class="code">E8</span><h2>Validation &amp; Clôture</h2></div>
+        <div class="body"><div class="sign" id="signBox"></div></div>
+      </section>
+
+      <div class="notes">
+        <span>Défaut sécurité ou réglementation : arrêter la ligne immédiatement, passage obligatoire au QRQC niveau 3.</span>
+        <span>Zones de tri : se référer au tableau de définition du périmètre de tri.</span>
+        <span>En cas d'apparition d'un défaut fonctionnalité primaire ou réapparition du même défaut pendant les 5 shifts, passer au niveau 2.</span>
+        <span>Les QRQC doivent être signés après la phase de vérification sur les cinq équipes.</span>
+      </div>
+    </form>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<dialog id="photoDlg">
+  <img id="photoImg" alt="Photo de la pièce">
+  <div class="row"><button class="btn danger" type="button" id="photoDel">Supprimer la photo</button><button class="btn primary" type="button" id="photoClose">Fermer</button></div>
+</dialog>
+
+<dialog id="qrDlg">
+  <h2>Scanner l'etiquette</h2>
+  <div style="position:relative">
+    <video id="qrVideo" autoplay playsinline muted style="width:100%;border-radius:6px;background:#000;display:block"></video>
+    <div style="position:absolute;left:25%;top:25%;width:50%;height:50%;border:3px solid #3ddc84;border-radius:8px;pointer-events:none;box-shadow:0 0 0 999px rgba(0,0,0,.35)"></div>
+  </div>
+  <canvas id="qrCanvas" hidden></canvas>
+  <p id="qrStatus" style="text-align:center;margin-top:8px">Recherche du QR code...</p>
+  <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:4px">Centrez le code dans le cadre vert, a 15-25 cm de la camera</p>
+  <div class="row"><button class="btn" type="button" id="qrCancel">Annuler</button></div>
+</dialog>
+
+<dialog id="installDlg">
+  <h2>Installer QRQC</h2>
+  <p>L'application s'ajoute avec son icône et s'ouvre en plein écran, même sans connexion.</p>
+  <h3>iPhone / iPad (Safari)</h3>
+  <ol><li>Touchez le bouton <b>Partager</b> (carré avec une flèche).</li><li>Choisissez <b>Sur l'écran d'accueil</b>, puis <b>Ajouter</b>.</li></ol>
+  <h3>Android (Chrome)</h3>
+  <ol><li>Menu <b>⋮</b> en haut à droite.</li><li><b>Installer l'application</b> (ou « Ajouter à l'écran d'accueil »).</li></ol>
+  <h3>PC Windows (Chrome ou Edge)</h3>
+  <ol><li>Cliquez sur l'icône <b>Installer</b> dans la barre d'adresse, ou menu <b>⋮ / …</b> → <b>Installer QRQC</b>.</li></ol>
+  <div class="row"><button class="btn primary" type="button" id="dlgClose">Compris</button></div>
+</dialog>
+
+<script>
+const COMMENT=[['visuel','Contrôle visuel'],['assemblage','Assemblage (Tableau / Kits)'],['electrique','Test électrique'],['camera','Contrôle Vision Caméra'],['dimensionnel','Contrôle dimensionnel'],['jauge',"Utilisation d'une jauge / Gabarit"],['autre','Autres']];
+const IMPACT=[['securite','Sécurité','*'],['reglementation','Réglementation','*'],['primaire','Fonctionnalité primaire','***'],['secondaire','Fonctionnalité secondaire',''],['aspect','Aspect','']];
+const ZONES=[['prod','En cours de production'],['mp','Magasin matière première'],['coupe','Zone coupe / Préparation'],['palette','Palette fin de ligne'],['pf','Magasin produit fini'],['compo','Composants similaires'],['projets','Projets similaires'],['autres','Autres']];
+const SECUR=[['tri',"L'opération de tri est parfaitement réalisée"],['feedback',"Application du feedback avec le poste générateur de défaut"],['communication',"La communication globale sur le défaut est assurée pour les cas de défaut sécuritaires, réglementaires et fonctions primaires"],['documents',"En cas de nouveau défaut, mise à jour des documents de contrôle au niveau des postes concernés si nécessaire [Poste générateur / Mur Qualité / FW]"]];
+const FIVE_M=["Main d'œuvre","Méthode","Matière","Machine","Milieu"];
+const SIGNERS=[['tl','Team Leader','E1 à E7'],['aq','Agent Qualité','E1 à E7'],['sup','Superviseur','E3 à E7'],['ojt','OJT','On Job Training']];
+
+function blank(){
+  const zones={};ZONES.forEach(([k])=>zones[k]={qi:'',ok:'',nok:''});
+  const o=(keys)=>Object.fromEntries(keys.map(([k])=>[k,false]));
+  return {numero:'',date:today(),projet:'',famille:'',teamSpeaker:'',agentQualite:'',superviseur:'',pieceBonne:'',pieceMauvaise:'',
+    e1:{description:'',matricule:'',ligne:'',poste:'',date:today(),heure:'',shift:'',comment:o(COMMENT),commentAutre:'',impact:o(IMPACT)},
+    e2:{zones},
+    e3:{protege:'',actions:o(SECUR)},
+    e4:{matricule:'',ligne:'',poste:'',date:'',heure:'',shift:''},
+    e5:{causes:[{m:'',texte:''},{m:'',texte:''},{m:'',texte:''},{m:'',texte:''},{m:'',texte:''}],actions:[{texte:'',nom:'',service:'',date:'',heure:''}]},
+    e7:{shifts:[0,1,2,3,4].map(()=>({date:'',defauts:''})),aql:''},
+    e8:Object.fromEntries(SIGNERS.map(([k])=>[k,{nom:'',fonction:'',date:'',visa:false}])),
+    photos:{bonne:[],mauvaise:[]},
+    createdAt:Date.now(),updatedAt:Date.now()};
+}
+function today(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function merge(base,src){ // complète les clés manquantes pour que les anciennes fiches restent valides
+  if(Array.isArray(base)){ // listes de longueur variable (causes, actions, photos)
+    if(!Array.isArray(src)) return base;
+    const tpl=base.length?base[0]:null, n=Math.max(base.length,src.length), out=[];
+    for(let i=0;i<n;i++){const b=base[i]!==undefined?base[i]:tpl;
+      out.push(src[i]!==undefined?(b!=null&&typeof b==='object'?merge(b,src[i]):src[i]):b)}
+    return out;
+  }
+  if(base&&typeof base==='object'){const r={...base};if(src&&typeof src==='object')for(const k in src)r[k]=k in base?merge(base[k],src[k]):src[k];return r}
+  return src===undefined?base:src;
+}
+const getP=(o,p)=>p.split('.').reduce((a,k)=>a==null?a:a[k],o);
+function setP(o,p,v){const ks=p.split('.');let a=o;ks.slice(0,-1).forEach(k=>a=a[k]);a[ks.at(-1)]=v}
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const hhmm=()=>new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+let toastT=null;
+function toast(t){const el=$('#toast');el.textContent=t;el.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>el.hidden=true,3500)}
+
+/* ---- construction des parties dynamiques ---- */
+$('#commentChecks').innerHTML=COMMENT.map(([k,l])=>`<label class="ck"><input type="checkbox" data-f="e1.comment.${k}">${l}</label>`).join('');
+$('#impactChecks').innerHTML=IMPACT.map(([k,l,s])=>`<label class="ck${s?' crit':''}"><input type="checkbox" data-f="e1.impact.${k}">${l}</label>`).join('');
+$('#securChecks').innerHTML=SECUR.map(([k,l])=>`<label class="ck"><input type="checkbox" data-f="e3.actions.${k}">${l}</label>`).join('');
+$('#zonesBody').innerHTML=ZONES.map(([k,l])=>`<tr><td class="rowh">${l}</td>${['qi','ok','nok'].map(c=>`<td><input type="number" min="0" inputmode="numeric" aria-label="${l} ${c}" data-f="e2.zones.${k}.${c}"></td>`).join('')}</tr>`).join('');
+$('#shiftsBox').innerHTML=[0,1,2,3,4].map(i=>`<div class="shift" id="shift${i}"><div class="lbl"><span>Shift ${i+1}</span><span class="st"></span></div><label class="fld"><span>Date</span><input type="date" data-f="e7.shifts.${i}.date"></label><label class="fld"><span>Défauts trouvés</span><input type="number" min="0" inputmode="numeric" data-f="e7.shifts.${i}.defauts"></label></div>`).join('');
+$('#signBox').innerHTML=SIGNERS.map(([k,l,s])=>`<div class="sig" id="sig-${k}"><h3>${l} <small>(${s})</small></h3><label class="fld"><span>Nom</span><input data-f="e8.${k}.nom"></label>${k==='ojt'?`<label class="fld"><span>Fonction</span><input data-f="e8.${k}.fonction"></label>`:''}<label class="fld"><span>Date</span><input type="date" data-f="e8.${k}.date"></label><label class="ck"><input type="checkbox" data-f="e8.${k}.visa">Visa — je valide</label></div>`).join('');
+document.querySelectorAll('[data-f]').forEach(el=>{el.id='f-'+el.dataset.f.replace(/\./g,'-')+(el.type==='radio'?'-'+el.value:'')});
+
+/* ---- état ---- */
+let fiches=[], cur=null, curId=null, dirty=false, saveT=null, filter='all', query='';
+const LS='qrqc-fiches-v1';
+function lsLoad(){try{return JSON.parse(localStorage.getItem(LS)||'{}')}catch(e){return {}}}
+function lsSave(map){try{localStorage.setItem(LS,JSON.stringify(map));return true}catch(e){return false}}
+
+function level(f){const i=f.e1.impact;if(i.securite||i.reglementation)return 3;if(i.primaire||f.e7.shifts.some(s=>Number(s.defauts)>0))return 2;return 1}
+function status(f){const s=f.e8;if(s.tl.visa&&s.aq.visa&&s.sup.visa)return['clos','Clôturée'];if(f.e7.shifts.some(x=>x.date||x.defauts!==''))return['verif','Vérification'];return['ouvert','Ouverte']}
+function pills(f){const [c,l]=status(f),n=level(f);return `<span class="pill ${c}">${l}</span>`+(n>1?` <span class="pill n${n}">Niveau ${n}</span>`:'')}
+
+function fill(){
+  document.querySelectorAll('[data-f]').forEach(el=>{const v=getP(cur,el.dataset.f);
+    if(el.type==='checkbox')el.checked=!!v;else if(el.type==='radio')el.checked=v===el.value;else el.value=v??''});
+  renderRows();renderPhotos();derive();
+}
+/* ---- E5 / E6 : autant de causes et d'actions que nécessaire ---- */
+const MAXROWS=50;
+const ACT_COLS=[['texte','text','Description'],['nom','text','Pilote'],['service','text','Service'],['date','date','Date'],['heure','time','Heure']];
+function renderRows(){
+  if(!cur)return;
+  const cs=cur.e5.causes,as=cur.e5.actions;
+  $('#causesBody').innerHTML=cs.map((c,i)=>`<tr><td class="rowh">Cause N°${i+1}</td>
+    <td><select aria-label="Famille 5M cause ${i+1}" data-f="e5.causes.${i}.m"><option value="">—</option>${FIVE_M.map(m=>`<option${c.m===m?' selected':''}>${m}</option>`).join('')}</select></td>
+    <td><input aria-label="Description cause ${i+1}" data-f="e5.causes.${i}.texte" value="${esc(c.texte)}"></td>
+    <td></td></tr>`).join('');
+  const nCompletedActions=as.filter(a=>a.texte&&a.nom&&a.service).length;const pctAction=as.length?Math.round(nCompletedActions*100/as.length):0;
+  $('#actionsBody').innerHTML=as.map((a,i)=>`<tr><td class="rowh">Action N°${i+1}</td>
+    ${ACT_COLS.map(([f,t,l])=>`<td><input type="${t}" aria-label="${l} action ${i+1}" data-f="e5.actions.${i}.${f}" value="${esc(a[f])}"></td>`).join('')}
+    <td class="rowdel">${as.length>1?`<button type="button" class="xbtn" data-del="action" data-i="${i}" aria-label="Supprimer l'action ${i+1}" title="Supprimer cette action">✕</button>`:''}</td></tr>`).join('');
+  $('#maxAction').textContent=as.length>=MAXROWS?MAXROWS+' actions maximum':'';
+  $('#addAction').hidden=as.length>=MAXROWS;
+  $('#actionsPct').textContent=nCompletedActions+'/'+as.length+' ('+pctAction+'%)';
+}
+function addRow(kind){
+  const list=kind==='cause'?cur.e5.causes:cur.e5.actions;
+  if(list.length>=MAXROWS){toast(MAXROWS+(kind==='cause'?' causes':' actions')+' maximum.');return}
+  list.push(kind==='cause'?{m:'',texte:''}:{texte:'',nom:'',service:'',date:'',heure:''});
+  renderRows();derive();schedule();
+  const rows=(kind==='cause'?$('#causesBody'):$('#actionsBody')).rows;
+  const inp=rows[rows.length-1].querySelector('input');if(inp)inp.focus();
+}
+$('#addAction').onclick=()=>addRow('action');
+function delRow(e){
+  const b=e.target.closest('.xbtn');if(!b)return;
+  if(b.dataset.del==='cause')return;
+  cur.e5.actions.splice(+b.dataset.i,1);
+  renderRows();derive();schedule();
+}
+$('#causesBody').addEventListener('click',delRow);
+$('#actionsBody').addEventListener('click',delRow);
+function derive(){
+  if(!cur)return;
+  const as=cur.e5.actions;const nCompleted=as.filter(a=>a.texte&&a.nom&&a.service).length;const pct=as.length?Math.round(nCompleted*100/as.length):0;
+  $('#actionsPct').textContent=nCompleted+'/'+as.length+' ('+pct+'%)';
+  $('#title').textContent=cur.numero?(/^qrqc/i.test(cur.numero)?'':'QRQC ')+cur.numero:'Nouvelle fiche QRQC';
+  $('#subtitle').textContent=[cur.projet,cur.famille,cur.e1.ligne&&'Ligne '+cur.e1.ligne].filter(Boolean).join(' · ')||'Remplir E1 à E8 — enregistrement automatique';
+  $('#statusPill').innerHTML=pills(cur);
+  let t={qi:0,ok:0,nok:0};Object.values(cur.e2.zones).forEach(z=>{for(const k in t)t[k]+=Number(z[k])||0});
+  $('#tQi').textContent=t.qi;$('#tOk').textContent=t.ok;$('#tNok').textContent=t.nok;
+  let clean=0;cur.e7.shifts.forEach((s,i)=>{const el=$('#shift'+i),has=s.defauts!=='';const bad=has&&Number(s.defauts)>0;
+    el.className='shift'+(has?(bad?' ko':' ok'):'');el.querySelector('.st').textContent=has?(bad?'NOK':'OK'):'';if(has&&!bad)clean++});
+  $('#shiftProg').textContent=clean+'/5 shifts OK';
+  SIGNERS.forEach(([k])=>$('#sig-'+k).classList.toggle('signed',!!cur.e8[k].visa));
+  const n=level(cur),a=[];
+  if(n===3)a.push(`<div class="alert n3"><div><b>Arrêter la ligne immédiatement</b>Défaut sécurité / réglementation : passage obligatoire au QRQC niveau 3.</div></div>`);
+  else if(n===2)a.push(`<div class="alert n2"><div><b>Passer au QRQC niveau 2</b>${cur.e1.impact.primaire?'Défaut fonctionnalité primaire.':'Réapparition du défaut pendant la vérification sur 5 shifts.'}</div></div>`);
+  $('#alerts').innerHTML=a.join('');
+  const has=v=>v!==''&&v!==false&&v!=null;
+  const any=o=>typeof o==='object'&&o?Object.values(o).some(any):has(o);
+  const e=cur.e1,chk={
+    s0:[!!(cur.numero&&cur.date&&cur.projet),any({n:cur.numero,p:cur.projet,f:cur.famille,t:cur.teamSpeaker,a:cur.agentQualite,s:cur.superviseur,b:cur.pieceBonne,m:cur.pieceMauvaise})],
+    e1:[!!(e.description&&e.matricule&&e.ligne&&e.date&&Object.values(e.comment).some(Boolean)),any({d:e.description,m:e.matricule,l:e.ligne,p:e.poste,h:e.heure,c:e.comment,i:e.impact})],
+    e2:[Object.values(cur.e2.zones).some(z=>z.qi!==''),any(cur.e2)],
+    e3:[!!cur.e3.protege&&Object.values(cur.e3.actions).every(Boolean),any(cur.e3)],
+    e4:[!!(cur.e4.matricule&&cur.e4.ligne&&cur.e4.date),any(cur.e4)],
+    e5:[!!(cur.e5.causes[0].texte&&cur.e5.actions[0].texte&&cur.e5.actions[0].nom),any(cur.e5)],
+    e7:[cur.e7.shifts.every(s=>s.defauts!==''),any(cur.e7)],
+    e8:[cur.e8.tl.visa&&cur.e8.aq.visa&&cur.e8.sup.visa,any(cur.e8)]};
+  document.querySelectorAll('#steps a').forEach(a=>{const [d,p]=chk[a.dataset.k];a.className=d?'done':p?'partial':''});
+}
+let dFrom='',dTo='';
+function inDates(f){
+  if(!dFrom&&!dTo)return true;
+  const d=f.date||f.e1.date||'';
+  if(!d)return false;
+  return (!dFrom||d>=dFrom)&&(!dTo||d<=dTo);
+}
+function filtered(){
+  const q=query.toLowerCase();
+  return fiches.filter(f=>(filter==='all'||status(f)[0]===filter)&&inDates(f)
+    &&(!q||[f.numero,f.e1.description,f.e1.ligne,f.projet,f.famille,f.date].join(' ').toLowerCase().includes(q)));
+}
+const nokTotal=f=>Object.values(f.e2.zones).reduce((s,z)=>s+(Number(z.nok)||0),0);
+const impacts=f=>IMPACT.filter(([k])=>f.e1.impact[k]).map(([,l])=>l).join(', ');
+const COLS=[
+  ['numero','N° QRQC',f=>f.numero||'—'],
+  ['date','Date',f=>f.date],
+  ['projet','Projet',f=>f.projet],
+  ['famille','Famille',f=>f.famille],
+  ['ligne','Ligne / Poste',f=>[f.e1.ligne,f.e1.poste].filter(Boolean).join(' / ')],
+  ['desc','Défaut',f=>f.e1.description],
+  ['impact','Impact',f=>impacts(f)],
+  ['nok','NOK',f=>nokTotal(f)],
+  ['statut','Statut',f=>status(f)[1]],
+  ['niveau','Niveau',f=>level(f)],
+  ['maj','Mis à jour',f=>f.updatedAt||0]];
+let sortK='maj',sortDir=-1,view='fiche';
+const sel=new Set();
+function renderDb(){
+  const all=fiches,rows=filtered(),col=COLS.find(c=>c[0]===sortK);
+  rows.sort((a,b)=>{const x=col[2](a),y=col[2](b);return (typeof x==='number'&&typeof y==='number'?x-y:String(x).localeCompare(String(y),'fr',{numeric:true}))*sortDir});
+  const cnt=k=>all.filter(f=>status(f)[0]===k).length;
+  $('#kpis').innerHTML=[['Fiches au total',all.length,'blue'],['Ouvertes',cnt('ouvert'),'amber'],['En vérification',cnt('verif'),'blue'],['Clôturées',cnt('clos'),'green'],['Escaladées N2 / N3',all.filter(f=>level(f)>1).length,'red'],['Pièces NOK (E2)',all.reduce((s,f)=>s+nokTotal(f),0),'']]
+    .map(([l,v,c])=>`<div class="kpi ${c}"><span>${l}</span><b>${v}</b></div>`).join('');
+  $('#dbCount').textContent=rows.length+' / '+all.length+' fiches';
+  const ids=rows.map(f=>f.id),allSel=ids.length&&ids.every(id=>sel.has(id));
+  $('#dbHead').innerHTML='<tr><th class="sel"><input type="checkbox" id="selAll" '+(allSel?'checked':'')+' aria-label="Tout sélectionner"></th>'
+    +COLS.map(([k,l])=>`<th data-k="${k}" aria-sort="${k===sortK?(sortDir>0?'ascending':'descending'):'none'}">${l}</th>`).join('')+'</tr>';
+  $('#dbBody').innerHTML=rows.length?rows.map(f=>{const n=level(f);return `<tr data-id="${esc(f.id)}">
+    <td class="sel"><input type="checkbox" data-sel="${esc(f.id)}" ${sel.has(f.id)?'checked':''} aria-label="Sélectionner la fiche ${esc(f.numero||'')}"></td>
+    <td class="mono">${esc(f.numero||'—')}</td><td>${esc(f.date)}</td><td>${esc(f.projet)}</td><td>${esc(f.famille)}</td>
+    <td>${esc([f.e1.ligne,f.e1.poste].filter(Boolean).join(' / '))}</td><td class="desc">${esc(f.e1.description)}</td>
+    <td class="${f.e1.impact.securite||f.e1.impact.reglementation||f.e1.impact.primaire?'imp':''}">${esc(impacts(f))}</td>
+    <td class="n">${nokTotal(f)}</td><td><span class="pill ${status(f)[0]}">${status(f)[1]}</span></td>
+    <td>${n>1?`<span class="pill n${n}">N${n}</span>`:'N1'}</td>
+    <td class="mono">${f.updatedAt?new Date(f.updatedAt).toLocaleString('fr-FR',{dateStyle:'short',timeStyle:'short'}):''}</td></tr>`}).join('')
+    :`<tr><td colspan="${COLS.length+1}" style="color:var(--muted);padding:18px">Aucune fiche ne correspond.</td></tr>`;
+  const nsel=rows.filter(f=>sel.has(f.id)).length;
+  $('#selInfo').textContent=nsel?nsel+' fiche(s) cochée(s) — seules celles-ci partiront dans Excel'
+    :'Aucune fiche cochée — les '+rows.length+' fiche(s) affichée(s) partiront dans Excel';
+  $('#xlsxBtn').textContent='Ouvrir dans Excel ('+(nsel||rows.length)+')';
+}
+function toExport(){const rows=filtered();const s=rows.filter(f=>sel.has(f.id));return s.length?s:rows}
+function setView(v){view=v;$('#dbview').hidden=v!=='db';$('#form').hidden=v==='db';
+  $('#tabFiche').setAttribute('aria-selected',v==='fiche');$('#tabDb').setAttribute('aria-selected',v==='db');
+  if(v==='db')renderDb();$('#main').scrollTop=0;$('#app').classList.remove('open')}
+$('#tabFiche').onclick=()=>setView('fiche');
+$('#tabDb').onclick=()=>setView('db');
+$('#menuBtn2').onclick=()=>$('#app').classList.add('open');
+$('#dbHead').addEventListener('click',e=>{
+  if(e.target.id==='selAll'){const rows=filtered();
+    if(e.target.checked)rows.forEach(f=>sel.add(f.id));else rows.forEach(f=>sel.delete(f.id));
+    renderDb();return}
+  const th=e.target.closest('th');if(!th||!th.dataset.k)return;
+  if(sortK===th.dataset.k)sortDir=-sortDir;else{sortK=th.dataset.k;sortDir=1}renderDb()});
+$('#dbBody').addEventListener('click',e=>{
+  const cb=e.target.closest('input[data-sel]');
+  if(cb){cb.checked?sel.add(cb.dataset.sel):sel.delete(cb.dataset.sel);renderDb();return}
+  const tr=e.target.closest('tr[data-id]');if(tr)open(tr.dataset.id)});
+$('#dFrom').onchange=e=>{dFrom=e.target.value;renderList()};
+$('#dTo').onchange=e=>{dTo=e.target.value;renderList()};
+$('#dClear').onclick=()=>{dFrom=dTo='';$('#dFrom').value='';$('#dTo').value='';renderList()};
+/* ---- Classeur Excel (.xlsx) écrit directement par l'app, sans bibliothèque ---- */
+const CRCT=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
+function crc32(b){let c=0xFFFFFFFF;for(let i=0;i<b.length;i++)c=CRCT[(c^b[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0}
+function zipStore(files){ // archive ZIP sans compression : suffisant pour du XML
+  const enc=new TextEncoder(),parts=[],dir=[];let off=0,n=0;
+  files.forEach(f=>{
+    const name=enc.encode(f.name),data=typeof f.data==='string'?enc.encode(f.data):f.data,crc=crc32(data);
+    const lh=new DataView(new ArrayBuffer(30));
+    lh.setUint32(0,0x04034b50,true);lh.setUint16(4,20,true);lh.setUint32(14,crc,true);
+    lh.setUint32(18,data.length,true);lh.setUint32(22,data.length,true);lh.setUint16(26,name.length,true);
+    parts.push(new Uint8Array(lh.buffer),name,data);
+    const ch=new DataView(new ArrayBuffer(46));
+    ch.setUint32(0,0x02014b50,true);ch.setUint16(4,20,true);ch.setUint16(6,20,true);ch.setUint32(16,crc,true);
+    ch.setUint32(20,data.length,true);ch.setUint32(24,data.length,true);ch.setUint16(28,name.length,true);ch.setUint32(42,off,true);
+    dir.push(new Uint8Array(ch.buffer),name);
+    off+=30+name.length+data.length;n++;
+  });
+  const dirSize=dir.reduce((s,p)=>s+p.length,0);
+  const eo=new DataView(new ArrayBuffer(22));
+  eo.setUint32(0,0x06054b50,true);eo.setUint16(8,n,true);eo.setUint16(10,n,true);eo.setUint32(12,dirSize,true);eo.setUint32(16,off,true);
+  return new Blob([...parts,...dir,new Uint8Array(eo.buffer)],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+}
+const xe=s=>String(s??'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])).replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g,'');
+function colRef(i){let s='',n=i+1;while(n>0){const m=(n-1)%26;s=String.fromCharCode(65+m)+s;n=(n-m-1)/26}return s}
+function sheetXml(sh){
+  const last=colRef(sh.cols.length-1);
+  const cols='<cols>'+sh.cols.map((c,i)=>`<col min="${i+1}" max="${i+1}" width="${c.w||14}" customWidth="1"/>`).join('')+'</cols>';
+  const head='<row r="1" ht="30" customHeight="1">'+sh.cols.map((c,i)=>`<c r="${colRef(i)}1" s="1" t="inlineStr"><is><t xml:space="preserve">${xe(c.t)}</t></is></c>`).join('')+'</row>';
+  const body=sh.rows.map((r,ri)=>'<row r="'+(ri+2)+'">'+sh.cols.map((c,i)=>{
+    const v=r[i],ref=colRef(i)+(ri+2);
+    if(c.n&&v!==''&&v!=null&&isFinite(v))return `<c r="${ref}" s="3"><v>${Number(v)}</v></c>`;
+    return `<c r="${ref}" s="2" t="inlineStr"><is><t xml:space="preserve">${xe(v)}</t></is></c>`;
+  }).join('')+'</row>').join('');
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews><sheetFormatPr defaultRowHeight="15"/>${cols}<sheetData>${head}${body}</sheetData><autoFilter ref="A1:${last}${sh.rows.length+1}"/></worksheet>`;
+}
+const STYLES=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><color rgb="FFFFFFFF"/><sz val="11"/><name val="Calibri"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF1757B8"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="2"><border><left/><right/><top/><bottom/><diagonal/></border><border><left style="thin"><color rgb="FFC9D6E8"/></left><right style="thin"><color rgb="FFC9D6E8"/></right><top style="thin"><color rgb="FFC9D6E8"/></top><bottom style="thin"><color rgb="FFC9D6E8"/></bottom><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="4"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1" applyAlignment="1"><alignment horizontal="center" vertical="center" wrapText="1"/></xf><xf numFmtId="49" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1" applyAlignment="1"><alignment vertical="top" wrapText="1"/></xf><xf numFmtId="0" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1" applyAlignment="1"><alignment horizontal="right" vertical="top"/></xf></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
+function xlsxBlob(sheets){
+  const files=[
+    {name:'[Content_Types].xml',data:`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>${sheets.map((s,i)=>`<Override PartName="/xl/worksheets/sheet${i+1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('')}<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>`},
+    {name:'_rels/.rels',data:`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`},
+    {name:'xl/workbook.xml',data:`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>${sheets.map((s,i)=>`<sheet name="${xe(s.name)}" sheetId="${i+1}" r:id="rId${i+1}"/>`).join('')}</sheets></workbook>`},
+    {name:'xl/_rels/workbook.xml.rels',data:`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${sheets.map((s,i)=>`<Relationship Id="rId${i+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i+1}.xml"/>`).join('')}<Relationship Id="rId${sheets.length+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`},
+    {name:'xl/styles.xml',data:STYLES}];
+  sheets.forEach((s,i)=>files.push({name:`xl/worksheets/sheet${i+1}.xml`,data:sheetXml(s)}));
+  return zipStore(files);
+}
+/* ---- contenu du classeur : 5 feuilles ---- */
+function workbookSheets(rows){
+  const yn=b=>b?'Oui':'Non';
+  const nph=(f,k)=>((f.photos&&f.photos[k])||[]).length;
+  const tot=f=>Object.values(f.e2.zones).reduce((t,z)=>({qi:t.qi+(+z.qi||0),ok:t.ok+(+z.ok||0),nok:t.nok+(+z.nok||0)}),{qi:0,ok:0,nok:0});
+  const maj=f=>f.updatedAt?new Date(f.updatedAt).toLocaleString('fr-FR',{dateStyle:'short',timeStyle:'short'}):'';
+  const shiftsOK=f=>f.e7.shifts.filter(s=>s.defauts!==''&&Number(s.defauts)===0).length+'/5';
+  const fiche={name:'Fiches QRQC',cols:[
+    {t:'N° QRQC',w:17},{t:'Date',w:11},{t:'Statut',w:14},{t:'Niveau',w:9},{t:'Projet',w:15},{t:'Famille',w:15},
+    {t:'Ligne / LAD',w:13},{t:'Poste',w:9},{t:'Défaut constaté',w:42},{t:'Impact',w:24},
+    {t:'Détecté par',w:13},{t:'Date détection',w:13},{t:'Heure',w:8},{t:'Shift',w:12},{t:'Moyen de détection',w:26},
+    {t:'Qté triée',w:10,n:1},{t:'OK',w:8,n:1},{t:'NOK',w:8,n:1},
+    {t:'Client protégé',w:14},{t:'Actions sécurisation',w:20},
+    {t:'Produit par',w:12},{t:'Ligne production',w:15},{t:'Poste',w:9},{t:'Date production',w:14},{t:'Shift',w:12},
+    {t:'Causes',w:9,n:1},{t:'Actions',w:9,n:1},{t:'Shifts OK',w:10},{t:'AQL',w:16},
+    {t:'Visa Team Leader',w:16},{t:'Visa Agent Qualité',w:17},{t:'Visa Superviseur',w:16},
+    {t:'Photos',w:9,n:1},{t:'Team Speaker',w:16},{t:'Mis à jour',w:17}],
+    rows:rows.map(f=>{const t=tot(f);return [f.numero,f.date,status(f)[1],'Niveau '+level(f),f.projet,f.famille,
+      f.e1.ligne,f.e1.poste,f.e1.description,impacts(f),
+      f.e1.matricule,f.e1.date,f.e1.heure,f.e1.shift,
+      COMMENT.filter(([k])=>f.e1.comment[k]).map(([,l])=>l).concat(f.e1.commentAutre||[]).join(', '),
+      t.qi,t.ok,t.nok,
+      f.e3.protege==='oui'?'Oui':f.e3.protege==='non'?'Non':'',
+      SECUR.filter(([k])=>f.e3.actions[k]).length+'/'+SECUR.length,
+      f.e4.matricule,f.e4.ligne,f.e4.poste,f.e4.date,f.e4.shift,
+      f.e5.causes.filter(c=>c.texte).length,f.e5.actions.filter(a=>a.texte).length,shiftsOK(f),f.e7.aql,
+      yn(f.e8.tl.visa),yn(f.e8.aq.visa),yn(f.e8.sup.visa),
+      nph(f,'bonne')+nph(f,'mauvaise'),f.teamSpeaker,maj(f)]})};
+  const causes={name:'Causes (E5)',cols:[{t:'N° QRQC',w:17},{t:'Date',w:11},{t:'Cause',w:10},{t:'Famille 5M',w:16},{t:'Description',w:60}],rows:[]};
+  rows.forEach(f=>f.e5.causes.forEach((c,i)=>{if(c.m||c.texte)causes.rows.push([f.numero,f.date,'N°'+(i+1),c.m,c.texte])}));
+  const actions={name:'Actions (E6)',cols:[{t:'N° QRQC',w:17},{t:'Date',w:11},{t:'Action',w:10},{t:'Description',w:50},{t:'Pilote',w:18},{t:'Service',w:16},{t:'Date de réalisation',w:17},{t:'Heure',w:8}],rows:[]};
+  rows.forEach(f=>f.e5.actions.forEach((a,i)=>{if(a.texte||a.nom)actions.rows.push([f.numero,f.date,'N°'+(i+1),a.texte,a.nom,a.service,a.date,a.heure])}));
+  const tri={name:'Tri par zone (E2)',cols:[{t:'N° QRQC',w:17},{t:'Date',w:11},{t:'Zone',w:30},{t:'Quantité initiale',w:15,n:1},{t:'OK',w:9,n:1},{t:'NOK',w:9,n:1}],rows:[]};
+  rows.forEach(f=>ZONES.forEach(([k,l])=>{const z=f.e2.zones[k];if(z.qi!==''||z.ok!==''||z.nok!=='')tri.rows.push([f.numero,f.date,l,z.qi,z.ok,z.nok])}));
+  const verif={name:'Vérification (E7)',cols:[{t:'N° QRQC',w:17},{t:'Shift',w:10},{t:'Date',w:12},{t:'Défauts trouvés',w:15,n:1},{t:'Résultat',w:11}],rows:[]};
+  rows.forEach(f=>f.e7.shifts.forEach((s,i)=>{if(s.date||s.defauts!=='')verif.rows.push([f.numero,'Shift '+(i+1),s.date,s.defauts,s.defauts===''?'':(Number(s.defauts)>0?'NOK':'OK')])}));
+  return [fiche,causes,actions,tri,verif];
+}
+function renderList(){
+  if(view==='db')renderDb();
+  const rows=filtered().sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0));
+  $('#list').innerHTML=rows.length?rows.map(f=>`<button type="button" class="item" data-id="${esc(f.id)}" aria-current="${f.id===curId}"><span class="top"><span class="num">${esc(f.numero||'Sans numéro')}</span><span>${pills(f)}</span></span><span class="desc">${esc(f.e1.description||'Défaut non décrit')}</span><span class="meta">${esc([f.date,f.e1.ligne&&'Ligne '+f.e1.ligne,f.projet].filter(Boolean).join(' · '))}</span></button>`).join('')
+    :`<div class="empty">${fiches.length?'Aucune fiche ne correspond.':'Aucune fiche enregistrée. Créez la première avec « Nouvelle fiche QRQC ».'}</div>`;
+}
+function syncMsg(t){$('#sync').textContent=t}
+
+/* ---- enregistrement (sur l'appareil) ---- */
+function persist(){
+  clearTimeout(saveT);saveT=null;if(!cur)return;
+  cur.updatedAt=Date.now();const body=JSON.parse(JSON.stringify(cur));delete body.id;
+  const map=lsLoad();map[curId]=body;
+  if(lsSave(map)){dirty=false;syncMsg('Enregistré sur cet appareil · '+hhmm())}
+  else syncMsg('Échec de l’enregistrement (mémoire pleine ?). Faites une sauvegarde .json puis supprimez d’anciennes fiches.');
+  upsertLocal();
+}
+function upsertLocal(){const i=fiches.findIndex(f=>f.id===curId),c={...cur,id:curId};if(i<0)fiches.push(c);else fiches[i]=c;renderList()}
+function schedule(){dirty=true;clearTimeout(saveT);saveT=setTimeout(persist,500);upsertLocal()}
+function flush(){if(saveT)persist()}
+// l'app peut être fermée à tout moment sur tablette/téléphone : on enregistre tout de suite
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')flush()});
+addEventListener('pagehide',flush);
+
+function open(id){
+  flush();
+  const f=fiches.find(x=>x.id===id);if(!f)return;
+  curId=id;cur=merge(blank(),JSON.parse(JSON.stringify(f)));delete cur.id;dirty=false;
+  fill();setView('fiche');renderList();disarm();
+}
+function newFiche(){
+  flush();
+  curId='q'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);cur=blank();
+  const pre='QRQC-'+new Date().getFullYear()+'-';
+  const max=fiches.reduce((m,f)=>(f.numero||'').startsWith(pre)?Math.max(m,parseInt(f.numero.slice(pre.length),10)||0):m,0);
+  cur.numero=pre+String(max+1).padStart(3,'0');
+  dirty=false;fill();setView('fiche');renderList();disarm();
+}
+let armed=false;
+function disarm(){armed=false;$('#delBtn').classList.remove('armed');$('#delBtn').textContent='Supprimer'}
+$('#delBtn').onclick=()=>{
+  if(!armed){armed=true;$('#delBtn').classList.add('armed');$('#delBtn').textContent='Confirmer la suppression';return}
+  clearTimeout(saveT);saveT=null;const id=curId;
+  const m=lsLoad();delete m[id];lsSave(m);
+  fiches=fiches.filter(f=>f.id!==id);
+  fiches.length?open([...fiches].sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0))[0].id):newFiche();
+  toast('Fiche supprimée.');
+};
+
+/* ---- fichiers : export Excel, sauvegarde et import ---- */
+const touch=matchMedia('(pointer:coarse)').matches;
+// App Android (Capacitor) : fichier écrit dans l'app puis feuille de partage native
+const cap=window.Capacitor&&Capacitor.isNativePlatform&&Capacitor.isNativePlatform()?Capacitor:null;
+const nativeApp=!!cap||/Electron/.test(navigator.userAgent);
+const toB64=d=>new Promise(ok=>{const fr=new FileReader();fr.onload=()=>ok(String(fr.result).split(',')[1]);fr.readAsDataURL(d instanceof Blob?d:new Blob([d]))});
+async function saveFile(name,data,type){
+  const isText=typeof data==='string';
+  if(cap){
+    const {Filesystem,Share}=cap.Plugins;
+    const opts={path:name,directory:'CACHE'};
+    if(isText){opts.data=data;opts.encoding='utf8'}else{opts.data=await toB64(data)}
+    const r=await Filesystem.writeFile(opts);
+    try{await Share.share({title:name,dialogTitle:'Enregistrer ou envoyer '+name,files:[r.uri]});return true}catch(e){return false}
+  }
+  const blob=data instanceof Blob?data:new Blob([data],{type});
+  // Sur tablette/téléphone : feuille de partage (Enregistrer dans Fichiers, Drive, e-mail…)
+  if(touch&&navigator.canShare){
+    const file=new File([blob],name,{type});
+    if(navigator.canShare({files:[file]})){
+      try{await navigator.share({files:[file],title:name});return true}
+      catch(e){if(e.name==='AbortError')return false}
+    }
+  }
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+  document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),5000);return true;
+}
+$('#xlsxBtn').onclick=async()=>{
+  flush();
+  const rows=toExport();
+  if(!rows.length){toast('Aucune fiche à exporter.');return}
+  const b=$('#xlsxBtn'),txt=b.textContent;b.disabled=true;b.textContent='Préparation…';
+  try{
+    const blob=xlsxBlob(workbookSheets(rows));
+    const nom='QRQC-'+today()+(rows.length===1?'-'+(rows[0].numero||'fiche').replace(/[^\w-]/g,''):'')+'.xlsx';
+    if(await saveFile(nom,blob,blob.type))toast('Fichier Excel prêt : '+rows.length+' fiche(s), 5 feuilles.');
+  }catch(e){toast("Export impossible : "+(e&&e.message||'erreur'))}
+  b.disabled=false;b.textContent=txt;
+};
+$('#backupBtn').onclick=async()=>{flush();
+  const data={app:'qrqc-niveau1',version:1,exportedAt:new Date().toISOString(),fiches};
+  if(await saveFile('sauvegarde-qrqc-'+today()+'.json',JSON.stringify(data),'application/json'))toast('Sauvegarde prête ('+fiches.length+' fiches).')};
+$('#importFile').onchange=async e=>{
+  const file=e.target.files[0];e.target.value='';if(!file)return;
+  try{
+    const data=JSON.parse(await file.text());const list=Array.isArray(data)?data:data&&data.fiches;
+    if(!Array.isArray(list))throw new Error('format');
+    flush();
+    const map=lsLoad();let add=0,upd=0;
+    list.forEach(f=>{if(!f||typeof f!=='object'||!f.id||!f.e1)return;const {id,...body}=f;const ex=map[id];
+      if(!ex){map[id]=body;add++}else if((body.updatedAt||0)>(ex.updatedAt||0)){map[id]=body;upd++}});
+    if(!lsSave(map)){toast('Mémoire pleine : import impossible.');return}
+    fiches=Object.entries(map).map(([id,d])=>norm(id,d));
+    if(map[curId]){cur=merge(blank(),JSON.parse(JSON.stringify(map[curId])));fill()}
+    renderList();toast(`Import terminé : ${add} ajoutée(s), ${upd} mise(s) à jour.`);
+  }catch(err){toast('Fichier non reconnu : choisissez une sauvegarde QRQC (.json).')}
+};
+
+/* ---- évènements ---- */
+const form=$('#form');
+function updateE3Auto(){const nb=Object.values(cur.e3.actions).filter(Boolean).length;
+  if(nb>=3)cur.e3.protege='oui';else if(nb>=1)cur.e3.protege='non';else cur.e3.protege='';
+  fill();derive();
+}
+function onEdit(e){const el=e.target;if(!el.dataset||!el.dataset.f||!cur)return;
+  let v=el.type==='checkbox'?el.checked:el.value;if(el.type==='radio'&&!el.checked)return;
+  setP(cur,el.dataset.f,v);
+  if(el.dataset.f.startsWith('e3.actions.'))updateE3Auto();else{derive();schedule()}
+}
+form.addEventListener('input',onEdit);form.addEventListener('change',onEdit);
+$('#list').addEventListener('click',e=>{const b=e.target.closest('.item');if(b)open(b.dataset.id)});
+$('#newBtn').onclick=newFiche;
+$('#search').addEventListener('input',e=>{query=e.target.value;renderList()});
+$('#filters').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;filter=b.dataset.s;
+  document.querySelectorAll('#filters .chip').forEach(c=>c.setAttribute('aria-pressed',c===b));renderList()});
+$('#menuBtn').onclick=()=>$('#app').classList.add('open');
+$('#scrim').onclick=()=>$('#app').classList.remove('open');
+document.addEventListener('click',e=>{if(armed&&e.target.id!=='delBtn')disarm()});
+
+/* ---- scan qr code + code-barres etiquette ---- */
+let zxLoaded=false;
+let zxLoading=null;
+function loadZxLib(){
+  if(zxLoaded)return Promise.resolve();
+  if(zxLoading)return zxLoading;
+  zxLoading=new Promise((ok,ko)=>{
+    const s=document.createElement('script');
+    s.src='zxing.min.js';
+    s.onload=()=>{zxLoaded=true;ok()};
+    s.onerror=()=>ko(new Error('load failed'));
+    document.head.appendChild(s);
+  });
+  return zxLoading;
+}
+let zxStream=null;
+let zxRunning=false;
+let zxTimer=null;
+function waitVideoReady(video){
+  return new Promise(res=>{
+    if(video.videoWidth>0){res();return}
+    const onReady=()=>{video.removeEventListener('loadedmetadata',onReady);res()};
+    video.addEventListener('loadedmetadata',onReady);
+    setTimeout(res,2000);
+  });
+}
+async function startQrScan(){
+  const dlg=$('#qrDlg');
+  const video=$('#qrVideo');
+  const canvas=$('#qrCanvas');
+  const status=$('#qrStatus');
+  status.textContent='Chargement...';
+  dlg.showModal();
+  try{
+    await loadZxLib();
+  }catch(e){
+    dlg.close();
+    toast('Impossible de charger le lecteur de codes (connexion internet requise).');
+    return;
+  }
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+    dlg.close();
+    toast('Camera non disponible sur cet appareil.');
+    return;
+  }
+  const constraints={video:{facingMode:{ideal:'environment'},width:{ideal:1920},height:{ideal:1080}}};
+  try{
+    zxStream=await navigator.mediaDevices.getUserMedia(constraints);
+  }catch(e){
+    try{
+      zxStream=await navigator.mediaDevices.getUserMedia({video:true});
+    }catch(e2){
+      dlg.close();
+      toast('Acces camera refuse : '+(e2&&e2.message?e2.message:e2));
+      return;
+    }
+  }
+  const track=zxStream.getVideoTracks()[0];
+  if(track&&track.getCapabilities){
+    const caps=track.getCapabilities();
+    if(caps.focusMode&&caps.focusMode.includes('continuous')){
+      try{await track.applyConstraints({advanced:[{focusMode:'continuous'}]})}catch(e){}
+    }
+  }
+  video.srcObject=zxStream;
+  try{await video.play()}catch(e){}
+  await waitVideoReady(video);
+  status.textContent='Recherche du code...';
+  const hints=new Map();
+  const fmts=[ZXing.BarcodeFormat.QR_CODE,ZXing.BarcodeFormat.EAN_13,ZXing.BarcodeFormat.EAN_8,
+    ZXing.BarcodeFormat.CODE_128,ZXing.BarcodeFormat.CODE_39,ZXing.BarcodeFormat.UPC_A,
+    ZXing.BarcodeFormat.UPC_E,ZXing.BarcodeFormat.ITF,ZXing.BarcodeFormat.DATA_MATRIX];
+  hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS,fmts);
+  hints.set(ZXing.DecodeHintType.TRY_HARDER,true);
+  const reader=new ZXing.MultiFormatReader();
+  reader.setHints(hints);
+  const ctx=canvas.getContext('2d',{willReadFrequently:true});
+  zxRunning=true;
+  let frames=0;
+  const tick=()=>{
+    if(!zxRunning)return;
+    const w=video.videoWidth,h=video.videoHeight;
+    if(w>0&&h>0){
+      canvas.width=w;
+      canvas.height=h;
+      ctx.drawImage(video,0,0,w,h);
+      let result=null;
+      try{
+        const src=new ZXing.HTMLCanvasElementLuminanceSource(canvas);
+        const bitmap=new ZXing.BinaryBitmap(new ZXing.HybridBinarizer(src));
+        result=reader.decode(bitmap);
+      }catch(e){}
+      if(!result){
+        try{
+          const cw=Math.round(w*0.5),ch=Math.round(h*0.5),cx=Math.round((w-cw)/2),cy=Math.round((h-ch)/2);
+          const zoomCanvas=document.createElement('canvas');
+          zoomCanvas.width=cw*2;zoomCanvas.height=ch*2;
+          const zctx=zoomCanvas.getContext('2d');
+          zctx.drawImage(canvas,cx,cy,cw,ch,0,0,cw*2,ch*2);
+          const zsrc=new ZXing.HTMLCanvasElementLuminanceSource(zoomCanvas);
+          const zbitmap=new ZXing.BinaryBitmap(new ZXing.HybridBinarizer(zsrc));
+          result=reader.decode(zbitmap);
+        }catch(e){}
+      }
+      frames++;
+      if(result&&result.getText){
+        const text=result.getText();
+        stopQrScan();
+        cur.numero=text;
+        fill();derive();schedule();
+        toast('Etiquette scannee : '+text);
+        return;
+      }
+      if(frames%20===0)status.textContent='Recherche du code... ('+frames+')';
+    }
+  };
+  zxTimer=setInterval(tick,80);
+}
+function stopQrScan(){
+  zxRunning=false;
+  if(zxTimer){clearInterval(zxTimer);zxTimer=null}
+  if(zxStream){zxStream.getTracks().forEach(t=>t.stop());zxStream=null}
+  $('#qrDlg').close();
+}
+$('#scanQrBtn').onclick=startQrScan;
+$('#qrCancel').onclick=stopQrScan;
+$('#qrDlg').addEventListener('cancel',stopQrScan);
+
+/* ---- installation (PWA) ---- */
+const standalone=nativeApp||matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+let installEvt=null;
+if(!standalone)$('#installBtn').hidden=false;
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvt=e;$('#installBtn').hidden=false});
+addEventListener('appinstalled',()=>{installEvt=null;$('#installBtn').hidden=true;toast('Application installée.')});
+$('#installBtn').onclick=async()=>{
+  if(installEvt){installEvt.prompt();await installEvt.userChoice;installEvt=null;return}
+  $('#installDlg').showModal();
+};
+$('#dlgClose').onclick=()=>$('#installDlg').close();
+if(!nativeApp&&location.protocol.startsWith('http')&&'serviceWorker' in navigator)addEventListener('load',()=>{
+  navigator.serviceWorker.register('sw.js').then(reg=>{
+    toast('Mode hors-ligne : installation en cours...');
+    const checkReady=()=>{
+      caches.open('qrqc-v3').then(c=>c.keys()).then(keys=>{
+        const names=keys.map(k=>new URL(k.url).pathname.split('/').pop());
+        const need=['index.html','zxing.min.js','manifest.webmanifest'];
+        const missing=need.filter(n=>!names.some(x=>x.includes(n)||x===n||(n==='index.html'&&names.includes(''))));
+        if(missing.length===0)toast('Mode hors-ligne pret (fichiers en cache).');
+        else toast('Cache incomplet, il manque : '+missing.join(', '));
+      });
+    };
+    if(reg.active)setTimeout(checkReady,3000);
+    else reg.addEventListener('updatefound',()=>{const nw=reg.installing;nw&&nw.addEventListener('statechange',()=>{if(nw.state==='activated')setTimeout(checkReady,1500)})});
+  }).catch(e=>{
+    toast('Erreur mode hors-ligne : '+(e&&e.message?e.message:e));
+  });
+});
+// Demande au navigateur de ne pas effacer les fiches pour libérer de la place
+if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{});
+
+/* ---- photos des pièces (bonne / mauvaise) ---- */
+const PIECES=[['bonne','pièce bonne'],['mauvaise','pièce mauvaise']];
+const MAXPH=4, PHMAX=1024, PHQ=.6;
+function photosOf(k){if(!cur.photos)cur.photos={bonne:[],mauvaise:[]};if(!Array.isArray(cur.photos[k]))cur.photos[k]=[];return cur.photos[k]}
+PIECES.forEach(([k,label])=>{
+  $('#btns-'+k).innerHTML=(cap
+    ? `<button class="btn" type="button" data-act="cam" data-k="${k}">📷 Prendre une photo</button><button class="btn" type="button" data-act="lib" data-k="${k}">🖼️ Galerie</button>`
+    : `<label class="btn" for="file-${k}">${touch?'📷 Prendre une photo / Galerie':'📁 Parcourir…'}</label>`)
+    +`<input type="file" id="file-${k}" accept="image/*" multiple hidden><span class="hintmax" id="max-${k}"></span>`;
+  $('#btns-'+k).title='Photos de la '+label;
+  const inp=$('#file-'+k);
+  if(inp)inp.onchange=async e=>{const files=[...e.target.files];e.target.value='';
+    for(const f of files){ if(photosOf(k).length>=MAXPH){toast(MAXPH+' photos maximum par pièce.');break}
+      try{await addPhoto(k,await compress(f))}catch(err){toast("Image illisible : "+f.name)} }};
+});
+$('#btns-bonne').onclick=$('#btns-mauvaise').onclick=async e=>{
+  const b=e.target.closest('button[data-act]');if(!b||!cap)return;
+  const k=b.dataset.k;
+  if(photosOf(k).length>=MAXPH){toast(MAXPH+' photos maximum par pièce.');return}
+  const Camera=cap.Plugins.Camera, photo=b.dataset.act==='cam';
+  try{
+    // L'app demande l'autorisation, puis ouvre l'appareil photo ou la galerie
+    if(Camera.checkPermissions){
+      const type=photo?'camera':'photos';
+      let st=await Camera.checkPermissions().catch(()=>null);
+      if(st&&st[type]!=='granted'&&st[type]!=='limited'){
+        st=await Camera.requestPermissions({permissions:[type]}).catch(()=>null);
+        if(st&&st[type]!=='granted'&&st[type]!=='limited'){
+          toast(photo?"Autorisation refusée : activez l'appareil photo dans les paramètres d'Android."
+                    :"Autorisation refusée : activez l'accès aux photos dans les paramètres d'Android.");
+          return;
+        }
+      }
+    }
+    const p=await Camera.getPhoto({quality:Math.round(PHQ*100),width:PHMAX,resultType:'dataUrl',correctOrientation:true,
+      source:photo?'CAMERA':'PHOTOS'});
+    if(p&&p.dataUrl)await addPhoto(k,p.dataUrl);
+  }catch(err){
+    const m=String(err&&err.message||'');
+    if(/cancel|annul|no image|no photo/i.test(m))return;        // annulé : on ne fait rien
+    $('#file-'+k).click();                                      // secours : sélecteur de fichiers
+  }
+};
+function loadImg(file){
+  if(window.createImageBitmap)return createImageBitmap(file,{imageOrientation:'from-image'}).catch(()=>createImageBitmap(file));
+  return new Promise((ok,ko)=>{const u=URL.createObjectURL(file),i=new Image();
+    i.onload=()=>{URL.revokeObjectURL(u);ok(i)};i.onerror=()=>{URL.revokeObjectURL(u);ko(new Error('image'))};i.src=u});
+}
+async function compress(file){ // photo allégée pour tenir dans la mémoire de l'appareil
+  const img=await loadImg(file),w=img.width||img.naturalWidth,h=img.height||img.naturalHeight;
+  const s=Math.min(1,PHMAX/Math.max(w,h)),c=document.createElement('canvas');
+  c.width=Math.max(1,Math.round(w*s));c.height=Math.max(1,Math.round(h*s));
+  c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+  if(img.close)img.close();
+  return c.toDataURL('image/jpeg',PHQ);
+}
+async function addPhoto(k,dataUrl){photosOf(k).push({d:dataUrl,t:Date.now()});renderPhotos();schedule();derive()}
+function renderPhotos(){
+  if(!cur)return;
+  PIECES.forEach(([k,label])=>{
+    const arr=photosOf(k);
+    $('#thumbs-'+k).innerHTML=arr.map((p,i)=>`<button type="button" class="thumb" data-k="${k}" data-i="${i}" title="Photo ${i+1}"><img src="${p.d}" alt="Photo ${i+1} de la ${label}"></button>`).join('');
+    $('#max-'+k).textContent=arr.length?arr.length+'/'+MAXPH+' photo(s)':'';
+    $('#btns-'+k).querySelectorAll('button[data-act],label').forEach(b=>b.hidden=arr.length>=MAXPH);
+  });
+}
+let photoK=null,photoI=null;
+document.querySelectorAll('.thumbs').forEach(box=>box.onclick=e=>{
+  const b=e.target.closest('.thumb');if(!b)return;
+  photoK=b.dataset.k;photoI=+b.dataset.i;
+  $('#photoImg').src=photosOf(photoK)[photoI].d;$('#photoDlg').showModal();
+});
+$('#photoDel').onclick=()=>{photosOf(photoK).splice(photoI,1);$('#photoDlg').close();renderPhotos();schedule()};
+$('#photoClose').onclick=()=>$('#photoDlg').close();
+
+/* ---- démarrage ---- */
+function norm(id,d){return {...merge(blank(),d),id}}
+fiches=Object.entries(lsLoad()).map(([id,d])=>norm(id,d));
+if(fiches.length)open([...fiches].sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0))[0].id);else newFiche();
+syncMsg(fiches.length?fiches.length+' fiche(s) sur cet appareil — fonctionne hors ligne.':'Stockage sur cet appareil — fonctionne hors ligne.');
+</script>
+</body>
+</html>
